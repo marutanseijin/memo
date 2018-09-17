@@ -1,0 +1,51 @@
+.neon {
+    text-shadow: 0 1px 30px #FB1684, 0 0 12px #fff, 2px 5px 60px #990a52;
+}
+
+.neon>.blink1 {
+    -webkit-animation: blink 3s infinite alternate;
+    animation: blink 3s infinite alternate;
+  }
+.neon>.blink2 {
+    -webkit-animation: blink 2s infinite alternate-reverse;
+    animation: blink 2s  infinite alternalternate-reverse;
+  }
+.neon>.blink3 {
+    -webkit-animation: blink 1s infinite alternate-reverse;
+    animation: blink 1s  infinite alternalternate-reverse;
+  }
+
+@-webkit-keyframes blink {
+    30% {
+      opacity: .85;
+    }
+    32% {
+      opacity: .4;
+    }
+    33% {
+      opacity: .85;
+    }
+    35% {
+      opacity: .4;
+    }
+    36% {
+      opacity: .85;
+    }
+  }
+  @keyframes blink {
+    30% {
+      opacity: .85;
+    }
+    32% {
+      opacity: .4;
+    }
+    33% {
+      opacity: .85;
+    }
+    35% {
+      opacity: .4;
+    }
+    36% {
+      opacity: .85;
+    }
+  }
