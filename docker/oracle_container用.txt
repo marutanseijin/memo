@@ -1,0 +1,72 @@
+
+
+
+CREATE USER cimat IDENTIFIED BY "cimat" DEFAULT TABLESPACE users TEMPORARY TABLESPACE temp;
+GRANT DBA TO cimat;
+GRANT UNLIMITED TABLESPACE TO cimat;
+CREATE TABLESPACE usr_cim
+DATAFILE 'usr_cim.dbf' SIZE 100M
+AUTOEXTEND ON NEXT 500K MAXSIZE 1024M;
+
+
+set CIMCONNECT=%cimDbUser%/%cimDbPAss%@%cimDbSid%
+cd %SCRIPTHOME%\sql
+call sqlplus -s %CIMCONNECT% @%cleanDB%
+imp %CIMCONNECT% fromuser=%cimDbExporter% touser=%cimDbUser% file=C:\Users\Administrator\cimtester01\cimtester01\scenario\dataLink\dmp\cim\installDMP\instlDmp_afterSetting.dmp ignore=y
+
+
+
+
+
+oracle-xe-11g
+
+sqlplus system/oracle@xe_11g
+
+
+CREATE USER cimat IDENTIFIED BY "cimat" DEFAULT TABLESPACE users TEMPORARY TABLESPACE temp;
+GRANT DBA TO cimat;
+GRANT UNLIMITED TABLESPACE TO cimat;
+CREATE TABLESPACE usr_cim
+DATAFILE 'usr_cim.dbf' SIZE 100M
+AUTOEXTEND ON NEXT 500K MAXSIZE 1024M;
+
+
+
+
+docker run -d -p 49161:1521 wnameless/oracle-xe-11g:16.04
+sqlplus cimat/cimat@xe_11g
+
+set appDmp=C:\workspace\autotest\application\dmp\cim.dmp
+set cleanDB=C:\workspace\autotest\application\script\sql\cleanDB.sql
+
+call sqlplus -s cimat/cimat@xe_11g @%cleanDB%
+imp cimat/cimat@xe_11g fromuser=cimat touser=cimat file=%appDmp% ignore=y
+
+
+
+set appDmp=C:\workspace\autotest\application\dmp\cim.dmp
+set cleanDB=C:\workspace\autotest\application\script\sql\cleanDB.sql
+
+call sqlplus -s cimat/cimat@xe_11g @%cleanDB%
+imp cimat/cimat@xe_11g fromuser=cimat touser=cimat file=%appDmp% ignore=y
+
+
+
+exp cimat/cimat@xe_11g file=C:\workspace\autotest\application\dmp\cim.dmp
+
+
+
+docker commit frosty_wright marutanseijin/11g-autotest-cim-app:initial
+
+docker stop frosty_wright
+
+docker run -d -p 49161:1521 --name cimat marutanseijin/11g-autotest-cim-app:initial
+
+
+// Init DB
+docker stop cimat
+docker rm cimat
+docker run -d -p 49161:1521 --name cimat marutanseijin/11g-autotest-cim-app:initial
+
+// Save DB state as [TAG_NAME]
+docker commit frosty_wright marutanseijin/11g-autotest-cim-app:[TAG_NAME]
