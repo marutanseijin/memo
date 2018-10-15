@@ -1,0 +1,29 @@
+apt install git 
+git clone https://github.com/creationix/nvm.git ~/.nvm
+
+ source ~/.nvm/nvm.sh
+
+ vi .bashrc
+
+
+# 下のやつを追加する
+if [[ -f ~/.nvm/nvm.sh ]]; then
+  source ~/.nvm/nvm.sh
+fi
+
+
+nvm install 8.12.0
+
+$ cd 任意のディレクトリ (※任意のディレクトリはデスクトップやドキュメントなどのあなたが作業しやすいディレクトリ)
+$ mkdir node-test (任意のディレクトリにnode-testというフォルダを作成)
+$ cd node-test (node-testに移動)
+$ npm i -g express-generator (グローバルでexpress-generatorを導入)
+$ express --view=ejs (expressの雛形アプリを作成)
+$ npm i (必要なnode_modulesをinstall)
+$ DEBUG=node-test:* npm start (アプリを立ち上げ)
+
+https://github.com/osamu38/node-express-curriculum/wiki/Node.js%E3%82%92%E5%A7%8B%E3%82%81%E3%81%A6%E3%81%BF%E3%82%88%E3%81%86
+
+
+
+
