@@ -17,7 +17,8 @@ setting{
                 version : 01
                 priority : 1 ~ 15
                 caption : hogehoge
-                restraint : hugahuga
+                restraint 
+                : hugahuga
 
                 level01{
                     level_name : huga
